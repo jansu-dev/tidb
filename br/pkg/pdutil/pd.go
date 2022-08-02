@@ -910,8 +910,7 @@ func FetchStoresAddr(ctx context.Context, tls *common.TLS, pdAddr string) ([]str
 	var rawStoresAddr struct {
 		Stores []rawStore `json:"stores"`
 	}
-	var strStoresAddr []string
-
+	strStoresAddr := make([]string, 0, 3)
 	err := tls.WithHost(pdAddr).GetJSON(ctx, "/pd/api/v1/stores", &rawStoresAddr)
 	if err != nil {
 		return strStoresAddr, errors.Trace(err)
